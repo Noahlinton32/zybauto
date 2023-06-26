@@ -5,7 +5,7 @@
 // @author       Noah Linton
 // @match        https://learn.zybooks.com/zybook/*
 // @namespace    https://github.com/Noahlinton32/zybauto/edit/main/zybook.js
-// @run-at document-idle
+// @run-at       document-idle
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
 
