@@ -1,19 +1,20 @@
-https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 // ==UserScript==
 // @name         zyBooks Autocomplete
 // @version      0.2
 // @description  One click to speed up the boring parts
 // @author       Noah Linton
 // @match        https://learn.zybooks.com/zybook/*
-// @namespace https://github.com/Evanito/zyBAuto
+// @namespace    https://github.com/Noahlinton32/zybauto/edit/main/zybook.js
 // @run-at document-idle
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
+
 // TO USE: Click Autocomplete! on a zyBooks page <-----
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
+
 // ==== SETTINGS ====
 var autoRun = false;
 // == END SETTINGS ==
@@ -21,44 +22,44 @@ var autoRun = false;
 // Do not edit below this line!
 // ==========================================
 var $ = window.$;
-(function() {
-    if (autoRun) {console.log
+setTimeout(function() {
+    if (autoRun) {
         run();
     } else {
         (function repeat() {
-          try {
-            document.getElementsByClassName('right-buttons')[0].innerHTML = '<button id="zbaButton" type="button">Autocomplete!</button>' + document.getElementsByClassName('right-buttons')[0].innerHTML;
-            document.getElementById("zbaButton").addEventListener ("click", zBAStartButton, false);
-          } catch (error) {
-          setTimeout(() => {
-            repeat()
-            }, 1000)
-        }})()
+            try {
+                document.getElementsByClassName('right-buttons')[0].innerHTML = '<button id="zbaButton" type="button">Autocomplete!</button>' + document.getElementsByClassName('right-buttons')[0].innerHTML;
+                document.getElementById("zbaButton").addEventListener ("click", zBAStartButton, false);
+            } catch (error) {
+                setTimeout(() => {
+                    repeat()
+                }, 1000)
+            }
+        })()
     }
-})();
-
+}, 5000);
 
 function zBAStartButton (zEvent) {
     console.clear();
-	run();
+    run();
 }
+
 // jquery functions
 $(document).ready(function() {
     $('#zbaButton').click(function() {
-	radioQuestions();
-	//challengeQuestions();
-	//answerQuestions();
-	//click_speed();
+        radioQuestions();
+        //challengeQuestions();
+        //answerQuestions();
+        //click_speed();
     });
 });
 
 function run() {
     //click_plays();
     //click_starts();
-    setTimeout(function(){ run(); }, 1000);
+    setTimeout(run, 1000);
 }
-
-function click_speed() { 
+function click_speed() {
     var twoSpeed = $("zb-checkbox.grey.label-present.right.ember-view").prop("checked",true);
 	//$(twoSpeed).prop(":checked");
 	//console.log(twoSpeed);
@@ -76,7 +77,7 @@ function click_starts() { // Clicks all Start buttons
     }
 }
 function timeout(){
-	
+
 }
 function answerQuestions(){
 var rTime = Math.floor((Math.random() * 4000) + 1000);
@@ -89,7 +90,7 @@ var textA = $("textarea.ember-text-area.ember-view.zb-text-area.hide-scrollbar")
 for(let i = 0; i<=answer.length;i++){
 	$(textA[i]).focus();
 	$(textA[i]).val($(answer[i]).text());
-	// this timeout just stops the click from running not every individual one 
+	// this timeout just stops the click from running not every individual one
 	//****NEEDS TO BE COMPLETED ONLY DELAYS THE ENTIRE TIME ACTION****
 	//https://www.geeksforgeeks.org/how-to-add-a-delay-in-a-javascript-loop/
 	setTimeout(function() {
@@ -105,14 +106,14 @@ function radioQuestions(){
 	// only select second button could be because the if or for statement is not terminating at the correct time i.e the correct field is not being shown for each respective eleemnt.
 	for(let i = 0; i<$(radioB).length;i++){
 		if(correct[i]!="Correct"||!(correct.length)){
-		radioB[i].attr('checked',true);	
+		radioB[i].attr('checked',true);
 		}
 		i=0;
 	}
 }
 function challengeQuestions(){
 $("button.zyante-progression-start-button.button").click();
-var input = $(" div.element.short-answer > input[type=number]");	
+var input = $(" div.element.short-answer > input[type=number]");
 var check = $("button.zyante-progression-check-button");
 var nCheck = $(" div.check-next-container > div:nth-child(1) > button");
 input.focus();
@@ -123,14 +124,14 @@ $(nCheck).prop("disabled",false);
 $(check).addClass("div.element.short-answer").removeClass("div element short-answer invalid-answer");
 $(nCheck).addClass("zyante-progression-check-button button").removeClass("zyante-progression-check-button button disabled");
 // the mathjx-element-#-frame is determined by how many numbers exist in the fields so if we can count until the element where the answer is it may be a viable solution
-//https://stackoverflow.com/questions/43760624/jquery-count-elements-until-you-reach-a-specific-element-and-stop-count this guy tries it 
+//https://stackoverflow.com/questions/43760624/jquery-count-elements-until-you-reach-a-specific-element-and-stop-count this guy tries it
 // contains all of the data var spanAnswer = $("span.zyante-progression-explanation.white-space-pre").html();
 //data-mathml="<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8</mn></math>"
 var spanAnswer = $( "span[data-mathml|='<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mn>']");
 console.log($(spanAnswer).html());
 console.log($(spanAnswer).text());
 }
-// add a delay for each buttons click 
+// add a delay for each buttons click
 
 
 // to answer the challenge questions you first have to get it wrong then take from the section that shows the incorrect answers
